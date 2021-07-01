@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transformImports basic 1`] = `
+Array [
+  Object {
+    "code": "",
+    "imports": Array [
+      "a",
+      "b",
+      "c",
+      "d",
+    ],
+    "type": "imports",
+  },
+  Object {
+    "code": "import a from \\"a.md\\";
+import b from \\"b.md\\";
+import c from \\"c.md\\";
+import d from \\"d.md\\";",
+    "imports": Array [
+      "a",
+      "b",
+      "c",
+      "d",
+    ],
+    "type": "script",
+  },
+]
+`;
+
+exports[`transformImports basic 2`] = `
+Array [
+  Object {
+    "code": "",
+    "imports": Array [
+      "moduleA",
+      "moduleB",
+      "moduleC",
+      "moduleD",
+    ],
+    "type": "imports",
+  },
+  Object {
+    "code": "import moduleA from \\"path/to/path/a.md\\";
+import moduleB from \\"path/to/path/b.md\\";
+import moduleC from \\"path/to/path/c.md\\";
+import moduleD from \\"path/to/path/d.md\\";",
+    "imports": Array [
+      "moduleA",
+      "moduleB",
+      "moduleC",
+      "moduleD",
+    ],
+    "type": "script",
+  },
+]
+`;

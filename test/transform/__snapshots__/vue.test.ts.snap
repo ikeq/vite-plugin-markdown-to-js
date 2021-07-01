@@ -1,0 +1,241 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseSFC basic 1`] = `
+Array [
+  Object {
+    "attrs": "",
+    "code": "
+<div>
+<template>asd</template>
+</div>",
+    "tag": "template",
+  },
+  Object {
+    "attrs": "",
+    "code": "
+export default { name: 'test' }",
+    "tag": "script",
+  },
+  Object {
+    "attrs": "",
+    "code": "
+.test { color: red; }",
+    "tag": "style",
+  },
+]
+`;
+
+exports[`parseSFC merging 1`] = `
+Array [
+  Object {
+    "attrs": " foo",
+    "code": "
+<template>1</template>
+<template>2</template>",
+    "tag": "template",
+  },
+  Object {
+    "attrs": " lang=\\"ts\\"",
+    "code": "
+export const a = 1;
+export default { name: 'test' };",
+    "tag": "script",
+  },
+  Object {
+    "attrs": " lang=\\"scss\\"",
+    "code": "
+.test { color: red; }
+.test { color: blue; }",
+    "tag": "style",
+  },
+]
+`;
+
+exports[`parseSFC template nesting 1`] = `
+Array [
+  Object {
+    "attrs": "",
+    "code": "
+<div>
+<template>
+  <template>
+    <template>asd</template>
+  </template>
+  <template>
+    <template>asd</template>
+  </template>
+</template>
+<template>
+  <template>
+    <template>asd</template>
+  </template>
+  <template>
+    <template>asd</template>
+  </template>
+</template>
+</div>",
+    "tag": "template",
+  },
+  Object {
+    "attrs": "",
+    "code": "
+.test { color: red; }",
+    "tag": "style",
+  },
+]
+`;
+
+exports[`parseSFC with attrs 1`] = `
+Array [
+  Object {
+    "attrs": " lang=\\"html\\"",
+    "code": "
+<div>
+  <template>asd</template>
+</div>",
+    "tag": "template",
+  },
+  Object {
+    "attrs": " lang=\\"ts\\"",
+    "code": "
+export default { name: 'test' }",
+    "tag": "script",
+  },
+  Object {
+    "attrs": " lang=\\"less\\" scoped",
+    "code": "
+.test { color: red; }",
+    "tag": "style",
+  },
+]
+`;
+
+exports[`transformVue basic 1`] = `
+Array [
+  Object {
+    "attrs": " lang=\\"scss\\"",
+    "code": "
+.test { color: red; }
+.test { color: blue; }",
+    "skipCompile": true,
+    "type": "style",
+  },
+  Object {
+    "attrs": " lang=\\"ts\\"",
+    "code": "
+export const a = 1;
+export default { name: 'test' };",
+    "skipCompile": true,
+    "type": "script",
+  },
+  Object {
+    "attrs": " foo",
+    "code": "
+<template>1</template>
+<template>2</template>",
+    "skipCompile": true,
+    "type": "template",
+  },
+  Object {
+    "code": "\`\`\`html
+\`\`\`",
+    "type": "html",
+  },
+]
+`;
+
+exports[`transformVue importsAsComponents: Function 1`] = `
+Array [
+  Object {
+    "attrs": " lang=\\"scss\\"",
+    "code": "
+.test { color: red; }
+.test { color: blue; }",
+    "skipCompile": true,
+    "type": "style",
+  },
+  Object {
+    "attrs": " lang=\\"ts\\"",
+    "code": [Function],
+    "skipCompile": true,
+    "type": "script",
+  },
+  Object {
+    "attrs": " foo",
+    "code": "
+<template>1</template>
+<template>2</template>",
+    "skipCompile": true,
+    "type": "template",
+  },
+  Object {
+    "code": "\`\`\`html
+\`\`\`",
+    "type": "html",
+  },
+]
+`;
+
+exports[`transformVue importsAsComponents: true 1`] = `
+Array [
+  Object {
+    "attrs": " lang=\\"scss\\"",
+    "code": "
+.test { color: red; }
+.test { color: blue; }",
+    "skipCompile": true,
+    "type": "style",
+  },
+  Object {
+    "attrs": " lang=\\"ts\\"",
+    "code": [Function],
+    "skipCompile": true,
+    "type": "script",
+  },
+  Object {
+    "attrs": " foo",
+    "code": "
+<template>1</template>
+<template>2</template>",
+    "skipCompile": true,
+    "type": "template",
+  },
+  Object {
+    "code": "\`\`\`html
+\`\`\`",
+    "type": "html",
+  },
+]
+`;
+
+exports[`transformVue sans script 1`] = `
+Array [
+  Object {
+    "attrs": "",
+    "code": "export default { };",
+    "skipCompile": true,
+    "type": "script",
+  },
+  Object {
+    "attrs": "",
+    "code": "
+.test { color: red; }",
+    "skipCompile": true,
+    "type": "style",
+  },
+  Object {
+    "attrs": "",
+    "code": "
+<div>
+  <template>asd</template>
+</div>",
+    "skipCompile": true,
+    "type": "template",
+  },
+  Object {
+    "code": "\`\`\`html
+\`\`\`",
+    "type": "html",
+  },
+]
+`;

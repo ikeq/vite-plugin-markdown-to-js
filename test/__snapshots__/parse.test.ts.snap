@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parse basic 1`] = `
+Object {
+  "html": "<h1 id=\\"title\\">title</h1>
+<p>asdasdasd</p>
+<p>asdasdasdasd</p>
+",
+  "script": "<script>
+export const matter = {};
+</script>",
+  "style": undefined,
+}
+`;
+
+exports[`parse transform imports & vue & importsAsComponents:true 1`] = `
+Object {
+  "html": "<h1 id=\\"title\\">title</h1>
+<a/><b/><c/>
+<div>
+<template>asd</template>
+</div><pre><code class=\\"language-html\\">&lt;template&gt;
+&lt;div&gt;
+&lt;template&gt;asd&lt;/template&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script lang=&quot;ts&quot;&gt;
+export default { name: &#39;test&#39; }
+&lt;/script&gt;
+&lt;style lang=&quot;less&quot; scoped&gt;
+.test { color: red; }
+&lt;/style&gt;
+</code></pre>
+<p>asdasdasdasd</p>
+",
+  "script": "<script lang=\\"ts\\">
+import a from \\"a.md\\";
+import b from \\"b.md\\";
+import c from \\"c.md\\";
+
+export default {
+ components: { a,b,c }, name: 'test' }
+export const matter = {};
+</script>",
+  "style": "<style lang=\\"less\\" scoped>
+
+.test { color: red; }
+</style>",
+}
+`;
+
+exports[`parse transform imports 1`] = `
+Object {
+  "html": "<h1 id=\\"title\\">title</h1>
+<p>asdasdasdasd</p>
+",
+  "script": "<script>
+import a from \\"a.md\\";
+import b from \\"b.md\\";
+import c from \\"c.md\\";
+export const matter = {};
+</script>",
+  "style": undefined,
+}
+`;
+
+exports[`parse transform vue 1`] = `
+Object {
+  "html": "<h1 id=\\"title\\">title</h1>
+
+<div>
+<template>asd</template>
+</div><pre><code class=\\"language-html\\">&lt;template&gt;
+&lt;div&gt;
+&lt;template&gt;asd&lt;/template&gt;
+&lt;/div&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default { name: &#39;test&#39; }
+&lt;/script&gt;
+&lt;style&gt;
+.test { color: red; }
+&lt;/style&gt;
+</code></pre>
+<p>asdasdasdasd</p>
+",
+  "script": "<script>
+
+export default { name: 'test' }
+export const matter = {};
+</script>",
+  "style": "<style>
+
+.test { color: red; }
+</style>",
+}
+`;
+
+exports[`parse with matter 1`] = `
+Object {
+  "html": "<h1 id=\\"title\\">title</h1>
+<p>asdasdasd</p>
+<p>asdasdasdasd</p>
+",
+  "script": "<script>
+export const matter = {\\"foo\\":\\"bar\\"};
+</script>",
+  "style": undefined,
+}
+`;
