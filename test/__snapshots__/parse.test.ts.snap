@@ -6,6 +6,7 @@ Object {
 <p>asdasdasd</p>
 <p>asdasdasdasd</p>
 ",
+  "matter": Object {},
   "script": "<script>
 export const matter = {};
 </script>",
@@ -33,6 +34,7 @@ export default { name: &#39;test&#39; }
 </code></pre>
 <p>asdasdasdasd</p>
 ",
+  "matter": Object {},
   "script": "<script lang=\\"ts\\">
 import a from \\"a.md\\";
 import b from \\"b.md\\";
@@ -54,6 +56,7 @@ Object {
   "html": "<h1 id=\\"title\\">title</h1>
 <p>asdasdasdasd</p>
 ",
+  "matter": Object {},
   "script": "<script>
 import a from \\"a.md\\";
 import b from \\"b.md\\";
@@ -84,6 +87,7 @@ export default { name: &#39;test&#39; }
 </code></pre>
 <p>asdasdasdasd</p>
 ",
+  "matter": Object {},
   "script": "<script>
 
 export default { name: 'test' }
@@ -102,6 +106,9 @@ Object {
 <p>asdasdasd</p>
 <p>asdasdasdasd</p>
 ",
+  "matter": Object {
+    "foo": "bar",
+  },
   "script": "<script>
 export const matter = {\\"foo\\":\\"bar\\"};
 </script>",

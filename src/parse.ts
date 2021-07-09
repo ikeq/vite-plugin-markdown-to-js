@@ -78,5 +78,6 @@ export function parse(raw: string, transforms?: LangTransform[], markedOptions?:
     }).join(''),
 
     style: style.length ? `<style${getAttrs(style)}>\n${style.map(s => s.code).join('\n')}\n</style>` : undefined,
+    matter,
   };
 }
