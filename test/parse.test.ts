@@ -37,11 +37,18 @@ const mdWithVue = `
 \`\`\`vue
 <template>
 <div>
-<template>asd</template>
+<template>{{ name }}</template>
 </div>
 </template>
 <script>
-export default { name: 'test' }
+export default {
+  name: 'test',
+  data() {
+    return {
+      name: 'foo'
+    }
+  }
+}
 </script>
 <style>
 .test { color: red; }

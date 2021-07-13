@@ -139,6 +139,7 @@ export default { name: 'test' };",
   Object {
     "code": "\`\`\`html
 \`\`\`",
+    "transform": [Function],
     "type": "html",
   },
 ]
@@ -171,6 +172,7 @@ Array [
   Object {
     "code": "\`\`\`html
 \`\`\`",
+    "transform": [Function],
     "type": "html",
   },
 ]
@@ -203,6 +205,7 @@ Array [
   Object {
     "code": "\`\`\`html
 \`\`\`",
+    "transform": [Function],
     "type": "html",
   },
 ]
@@ -235,6 +238,7 @@ Array [
   Object {
     "code": "\`\`\`html
 \`\`\`",
+    "transform": [Function],
     "type": "html",
   },
 ]

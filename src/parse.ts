@@ -8,6 +8,7 @@ export interface CodeBlock<T = string | CodeFn> {
   skipCompile?: true;
   code: T;
   attrs?: string;
+  transform?: (source: string) => string;
   [name: string]: any;
 }
 
@@ -74,7 +75,9 @@ export function parse(raw: string, transforms?: LangTransform[], markedOptions?:
     html: html.map(i => {
       if (!i.code) return '';
       if (i.skipCompile) return i.code;
-      return marked(i.code as string);
+
+      const ret = marked(i.code as string);
+      return i.transform ? i.transform(ret) : ret;
     }).join(''),
 
     style: style.length ? `<style${getAttrs(style)}>\n${style.map(s => s.code).join('\n')}\n</style>` : undefined,
