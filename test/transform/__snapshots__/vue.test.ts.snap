@@ -91,7 +91,8 @@ Array [
     "attrs": " lang=\\"html\\"",
     "code": "
 <div>
-  <template>asd</template>
+  <template
+  a=\\"1\\">asd</template>
 </div>",
     "tag": "template",
   },

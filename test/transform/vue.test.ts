@@ -17,7 +17,8 @@ export default { name: 'test' }
 const sfcWithAttrs = `
 <template lang="html">
 <div>
-  <template>asd</template>
+  <template
+  a="1">asd</template>
 </div>
 </template>
 <script lang="ts">

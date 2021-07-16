@@ -2,7 +2,7 @@ const tagOpeningRe = /\<((?:[a-z]+)(?:-[a-z]+)?)\s?/;
 
 function parseTag(content: string, tag: string) {
   const matcher = {
-    openingRe: new RegExp(`\\<${tag}(.*?)\\>`),
+    openingRe: new RegExp(`\\<${tag}([\\s\\S]*?)\\>`),
     closingRe: new RegExp(`\\<\\/${tag}\\>`)
   };
   let remaining = content;
