@@ -2,6 +2,7 @@ import camelCase from 'lodash/camelCase';
 import { LangTransform } from "../parse";
 
 const rSplit = /[\n\s,]/;
+const rExt = /\.\w+$/;
 
 /**
  * @example
@@ -32,7 +33,7 @@ export function transformImports({ base, defaultPrefix }: { base?: string; defau
           type: 'script',
           imports: importNames,
           code: imports.map((i, index) =>
-            `import ${importNames[index]} from "${base || ''}${i}.md";`).join('\n')
+            `import ${importNames[index]} from "${base || ''}${i}${rExt.test(i) ? '' : '.md'}";`).join('\n')
         }
       ];
     },
