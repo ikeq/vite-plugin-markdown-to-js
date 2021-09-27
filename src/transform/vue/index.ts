@@ -31,7 +31,7 @@ export function transformVue(options: {
       const ret: CodeBlock[] = [{
         type: 'html',
         code: md.replace('```vue', '```html'),
-        transform: source => `<!-- langvue -->${source.replace(/\{{2}/g, '&#x7B;&#x7B;').replace(/\}{2}/g, '&#x7D;&#x7D;')}<!-- endlangvue -->`,
+        transform: source => `<!-- langvue -->${source.replace(/^<pre>/, '<pre v-pre>')}<!-- endlangvue -->`,
       }];
 
       if (!blocks.length) return ret;
