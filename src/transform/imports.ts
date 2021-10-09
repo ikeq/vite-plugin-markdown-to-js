@@ -13,10 +13,18 @@ const rExt = /\.\w+$/;
  * ```
  * ```
  */
-export function transformImports({ base, defaultPrefix }: { base?: string; defaultPrefix?: string } = {}): LangTransform {
-  if (base && !base.endsWith('/')) {
-    base = `${base}/`;
-  }
+export function transformImports({ base, defaultPrefix }: { base?: string | ((path: string) => string); defaultPrefix?: string } = {}): LangTransform {
+  const baseFn = (() => {
+    if (typeof base === 'function') return base;
+    if (typeof base === 'string') {
+      if (base && !base.endsWith('/')) {
+        base = `${base}/`;
+      }
+      return (path: string) => `${base || ''}${path}`;
+    }
+    return (path: string) => path;
+  })();
+
   return {
     lang: 'imports',
     transform(src) {
@@ -32,8 +40,12 @@ export function transformImports({ base, defaultPrefix }: { base?: string; defau
         {
           type: 'script',
           imports: importNames,
-          code: imports.map((i, index) =>
-            `import ${importNames[index]} from "${base || ''}${i}${rExt.test(i) ? '' : '.md'}";`).join('\n')
+          code: imports.map(
+            (i, index) => {
+              const path = baseFn(`${i}${rExt.test(i) ? '' : '.md'}`);
+              return `import ${importNames[index]} from "${path}";`
+            }
+          ).join('\n')
         }
       ];
     },

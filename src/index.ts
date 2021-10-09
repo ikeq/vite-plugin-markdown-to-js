@@ -29,7 +29,7 @@ export default function vitePluginMarkdownToJs(options: Options): PluginOption {
         try {
           return markdownToJs(raw, id);
         } catch (e) {
-          this.error(e);
+          console.error(e);
         }
       }
     },
