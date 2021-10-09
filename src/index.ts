@@ -4,7 +4,7 @@ import { LangTransform, parse } from './parse';
 
 interface Options {
   transforms: LangTransform[];
-  render?: (output: ReturnType<typeof parse>, env: { path: string }) => string;
+  render?: (output: ReturnType<typeof parse>, env: { path: string; raw: string; }) => string;
   markedOptions?: MarkedOptions;
 }
 
@@ -18,7 +18,7 @@ export default function vitePluginMarkdownToJs(options: Options): PluginOption {
     || ((output) => `export default ${JSON.stringify(output.html + output.style + output.script)};`);
 
   function markdownToJs(raw: string, id: string) {
-    return render(parse(raw, transforms, options.markedOptions), { path: id });
+    return render(parse(raw, transforms, options.markedOptions), { path: id, raw });
   }
 
   return {

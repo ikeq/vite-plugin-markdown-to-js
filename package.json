@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-markdown-to-js",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Markdown to script.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
