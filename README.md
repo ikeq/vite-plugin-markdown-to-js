@@ -10,13 +10,17 @@ export default {
   plugins: [
     markdownToJs({
       transforms: [
-        transformImports({ defaultPrefix: 'demo', base: './demo' }),
+        transformImports({ defaultPrefix: 'demo', base: './' }),
         transformVue({
           importsAsComponents: true,
-        })
+        }),
       ],
       render(output, env) {
-        return [output.html, output.script, output.style].join('\n');
+        return [
+          `<template><div>${output.html}</div></template>`,
+          output.script,
+          output.style
+        ].join('\n');
       },
       markedOptions: {},
     }),

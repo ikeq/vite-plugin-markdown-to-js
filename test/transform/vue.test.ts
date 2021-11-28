@@ -105,19 +105,19 @@ describe('transformVue', () => {
   it('basic', () => {
     const { transform } = transformVue();
 
-    expect(transform(sfcMerging, '```vue\n```')).toMatchSnapshot();
+    expect(transform(sfcMerging, '```vue\n```', { matter: {} })).toMatchSnapshot();
   });
 
   it('sans script', () => {
     const { transform } = transformVue();
 
-    expect(transform(sfcSansScript, '```vue\n```')).toMatchSnapshot();
+    expect(transform(sfcSansScript, '```vue\n```', { matter: {} })).toMatchSnapshot();
   });
 
   it('importsAsComponents: true', () => {
     const { transform } = transformVue({ importsAsComponents: true });
 
-    expect(transform(sfcMerging, '```vue\n```')).toMatchSnapshot();
+    expect(transform(sfcMerging, '```vue\n```', { matter: {} })).toMatchSnapshot();
   });
 
   it('importsAsComponents: Function', () => {
@@ -127,6 +127,6 @@ describe('transformVue', () => {
       }
     });
 
-    expect(transform(sfcMerging, '```vue\n```')).toMatchSnapshot();
+    expect(transform(sfcMerging, '```vue\n```', { matter: {} })).toMatchSnapshot();
   });
 });

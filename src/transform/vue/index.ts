@@ -1,6 +1,18 @@
 import kebabCase from 'lodash/kebabCase';
 import { CodeBlock, LangTransform } from '../../parse';
-import { parseSFC } from './sfc'
+import { parseSFC } from './sfc';
+
+
+const defaultRenders: Record<'template' | 'script' | 'style', (code: string, meta: any, env: Parameters<LangTransform['transform']>[2]) => string> = {
+  template: code => code,
+  style: code => code,
+  script: (code, { imports }) => {
+    if (!code) {
+      return `export default { components: { ${imports || ''} } };`;
+    }
+    return code.replace('export default {', `export default {\n components: { ${imports || ''} },`);
+  },
+};
 
 /**
  * @example
@@ -16,17 +28,23 @@ import { parseSFC } from './sfc'
  */
 export function transformVue(options: {
   importsAsComponents?: boolean | ((imports: string[]) => string);
+  renders?: typeof defaultRenders
 } = {}): LangTransform {
   return {
     lang: 'vue',
     tokenize(tokens) {
       if (!tokens.some((token) => token.type === 'code' && token.lang === 'vue')) {
-        tokens.push({ type: 'code', lang: 'vue', text: '<script>export default {};</script>', raw: '' });
+        tokens.push({ type: 'code', lang: 'vue', text: '<script></script>', raw: '' });
       }
 
       return tokens;
     },
-    transform(src, md) {
+    transform(src, md, env) {
+      const renders: typeof options.renders = {
+        template: options.renders?.template || defaultRenders.template,
+        style: options.renders?.style || defaultRenders.style,
+        script: options.renders?.script || defaultRenders.script,
+      };
       const blocks = parseSFC<'template' | 'script' | 'style'>(src);
       const ret: CodeBlock[] = [{
         type: 'html',
@@ -46,7 +64,21 @@ export function transformVue(options: {
       if (!tags.script) {
         tags.script = {
           tag: 'script',
-          code: `export default { };`,
+          code: ``,
+          attrs: '',
+        };
+      }
+      if (!tags.template) {
+        tags.template = {
+          tag: 'template',
+          code: ``,
+          attrs: '',
+        };
+      }
+      if (!tags.style) {
+        tags.style = {
+          tag: 'style',
+          code: ``,
           attrs: '',
         };
       }
@@ -54,6 +86,7 @@ export function transformVue(options: {
       Object.keys(tags).forEach((key) => {
         const tagName = key as keyof typeof tags;
         const block = tags[tagName];
+        const renderer = renders[tagName];
         const code: CodeBlock['code'] = tagName === 'script' && options.importsAsComponents
           ? (scripts, html) => {
             const imports = scripts.map((i) => i.imports || []).flat(2);
@@ -70,9 +103,9 @@ export function transformVue(options: {
               }
             });
 
-            return block.code.replace('export default {', `export default {\n components: { ${imports} },`);
+            return renderer(block.code, { imports }, env)
           }
-          : block.code;
+          : renderer(block.code, {}, env);
 
         ret.unshift({ type: tagName, attrs: block.attrs, code, skipCompile: true });
       });

@@ -15,7 +15,7 @@ export interface CodeBlock<T = string | CodeFn> {
 export interface LangTransform {
   lang: string;
   tokenize?: (tokens: marked.TokensList) => marked.TokensList;
-  transform: (code: string, md: string) => CodeBlock | CodeBlock[];
+  transform: (code: string, md: string, env: { matter: any }) => CodeBlock | CodeBlock[];
 }
 
 export function parse(raw: string, transforms?: LangTransform[], markedOptions?: MarkedOptions) {
@@ -47,7 +47,7 @@ export function parse(raw: string, transforms?: LangTransform[], markedOptions?:
       return;
     }
 
-    const transformed = transform.transform(token.text, token.raw);
+    const transformed = transform.transform(token.text, token.raw, { matter });
 
     transformed.flat(2).forEach((td: CodeBlock) => {
       if (td.type !== 'script') {

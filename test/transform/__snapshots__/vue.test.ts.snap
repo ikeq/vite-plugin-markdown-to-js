@@ -125,7 +125,8 @@ Array [
     "attrs": " lang=\\"ts\\"",
     "code": "
 export const a = 1;
-export default { name: 'test' };",
+export default {
+ components: {  }, name: 'test' };",
     "skipCompile": true,
     "type": "script",
   },
@@ -216,7 +217,7 @@ exports[`transformVue sans script 1`] = `
 Array [
   Object {
     "attrs": "",
-    "code": "export default { };",
+    "code": "export default { components: {  } };",
     "skipCompile": true,
     "type": "script",
   },

@@ -20,7 +20,7 @@ Object {
 <a/><b/><c/>
 <div>
 <template>asd</template>
-</div><pre><code class=\\"language-html\\">&lt;template&gt;
+</div><!-- langvue --><pre v-pre><code class=\\"language-html\\">&lt;template&gt;
 &lt;div&gt;
 &lt;template&gt;asd&lt;/template&gt;
 &lt;/div&gt;
@@ -32,7 +32,7 @@ export default { name: &#39;test&#39; }
 .test { color: red; }
 &lt;/style&gt;
 </code></pre>
-<p>asdasdasdasd</p>
+<!-- endlangvue --><p>asdasdasdasd</p>
 ",
   "matter": Object {},
   "script": "<script lang=\\"ts\\">
@@ -73,9 +73,9 @@ Object {
 
 <div>
 <template>{{ name }}</template>
-</div><pre><code class=\\"language-html\\">&lt;template&gt;
+</div><!-- langvue --><pre v-pre><code class=\\"language-html\\">&lt;template&gt;
 &lt;div&gt;
-&lt;template&gt;&#x7B;&#x7B; name &#x7D;&#x7D;&lt;/template&gt;
+&lt;template&gt;{{ name }}&lt;/template&gt;
 &lt;/div&gt;
 &lt;/template&gt;
 &lt;script&gt;
@@ -92,12 +92,13 @@ export default {
 .test { color: red; }
 &lt;/style&gt;
 </code></pre>
-<p>asdasdasdasd</p>
+<!-- endlangvue --><p>asdasdasdasd</p>
 ",
   "matter": Object {},
   "script": "<script>
 
 export default {
+ components: {  },
   name: 'test',
   data() {
     return {
