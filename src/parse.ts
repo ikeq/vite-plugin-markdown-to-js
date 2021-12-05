@@ -15,10 +15,10 @@ export interface CodeBlock<T = string | CodeFn> {
 export interface LangTransform {
   lang: string;
   tokenize?: (tokens: marked.TokensList) => marked.TokensList;
-  transform: (code: string, md: string, env: { matter: any }) => CodeBlock | CodeBlock[];
+  transform: (code: string, md: string, env: { matter: any, path: string }) => CodeBlock | CodeBlock[];
 }
 
-export function parse(raw: string, transforms?: LangTransform[], markedOptions?: MarkedOptions) {
+export function parse(raw: string, transforms: LangTransform[], path: string, markedOptions?: MarkedOptions) {
   const { data: matter, content } = parseMatter(raw);
   const tokens = marked.lexer(content);
   const html: CodeBlock[] = [];
@@ -47,7 +47,7 @@ export function parse(raw: string, transforms?: LangTransform[], markedOptions?:
       return;
     }
 
-    const transformed = transform.transform(token.text, token.raw, { matter });
+    const transformed = transform.transform(token.text, token.raw, { matter, path });
 
     transformed.flat(2).forEach((td: CodeBlock) => {
       if (td.type !== 'script') {

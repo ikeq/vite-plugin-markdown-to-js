@@ -18,7 +18,7 @@ export default function vitePluginMarkdownToJs(options: Options): PluginOption {
     || ((output) => `export default ${JSON.stringify(output.html + output.style + output.script)};`);
 
   function markdownToJs(raw: string, id: string) {
-    return render(parse(raw, transforms, options.markedOptions), { path: id, raw });
+    return render(parse(raw, transforms, id, options.markedOptions), { path: id, raw });
   }
 
   return {

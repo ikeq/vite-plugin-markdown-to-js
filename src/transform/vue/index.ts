@@ -4,9 +4,10 @@ import { parseSFC } from './sfc';
 
 
 const defaultRenders: Record<'template' | 'script' | 'style', (code: string, meta: any, env: Parameters<LangTransform['transform']>[2]) => string> = {
-  template: code => code,
-  style: code => code,
+  template: code => code.trim(),
+  style: code => code.trim(),
   script: (code, { imports }) => {
+    code = code.trim();
     if (!code) {
       return `export default { components: { ${imports || ''} } };`;
     }
@@ -64,21 +65,21 @@ export function transformVue(options: {
       if (!tags.script) {
         tags.script = {
           tag: 'script',
-          code: ``,
+          code: '',
           attrs: '',
         };
       }
       if (!tags.template) {
         tags.template = {
           tag: 'template',
-          code: ``,
+          code: '',
           attrs: '',
         };
       }
       if (!tags.style) {
         tags.style = {
           tag: 'style',
-          code: ``,
+          code: '',
           attrs: '',
         };
       }
