@@ -15,10 +15,19 @@ export interface CodeBlock<T = string | CodeFn> {
 export interface LangTransform {
   lang: string;
   tokenize?: (tokens: marked.TokensList) => marked.TokensList;
-  transform: (code: string, md: string, env: { matter: any, path: string }) => CodeBlock | CodeBlock[];
+  transform: (
+    code: string,
+    md: string,
+    env: { matter: any; path: string }
+  ) => CodeBlock | CodeBlock[];
 }
 
-export function parse(raw: string, transforms: LangTransform[], path: string, markedOptions?: MarkedOptions) {
+export function parse(
+  raw: string,
+  transforms: LangTransform[],
+  path: string,
+  markedOptions?: MarkedOptions
+) {
   const { data: matter, content } = parseMatter(raw);
   const tokens = marked.lexer(content);
   const html: CodeBlock[] = [];
@@ -27,20 +36,20 @@ export function parse(raw: string, transforms: LangTransform[], path: string, ma
   // function type is delayed
   const scriptFn: CodeBlock<CodeFn>[] = [];
 
-  transforms && transforms.forEach(tms => {
+  transforms?.forEach((tms) => {
     if (tms.tokenize) {
       tms.tokenize(tokens);
     }
   });
 
-  tokens.forEach(token => {
+  tokens.forEach((token) => {
     if (token.type === 'space') return;
     if (token.type !== 'code' || !transforms) {
       html.push({ type: 'html', code: token.raw });
       return;
     }
 
-    const transform = transforms.find(t => t.lang === token.lang);
+    const transform = transforms.find((t) => t.lang === token.lang);
 
     if (!transform) {
       html.push({ type: 'html', code: token.raw });
@@ -62,25 +71,33 @@ export function parse(raw: string, transforms: LangTransform[], path: string, ma
     marked.setOptions(markedOptions);
   }
 
-  const getAttrs = (...args: CodeBlock[][]) => (args.flat(2).find(i => i.attrs) || {}).attrs || '';
+  const getAttrs = (...args: CodeBlock[][]) =>
+    (args.flat(2).find((i) => i.attrs) || {}).attrs || '';
 
   return {
-    script: `<script${getAttrs(script, scriptFn)}>\n` + [
-      ...script.map(i => i.code),
-      ...scriptFn.map(i => i.code(script, html)),
-      `export const matter = ${JSON.stringify(matter)};`
-    ].join('\n') + `\n</script>`,
+    script:
+      `<script${getAttrs(script, scriptFn)}>\n` +
+      [
+        ...script.map((i) => i.code),
+        ...scriptFn.map((i) => i.code(script, html)),
+        `export const matter = ${JSON.stringify(matter)};`,
+      ].join('\n') +
+      `\n</script>`,
 
     // comes last so that it can be modified by script
-    html: html.map(i => {
-      if (!i.code) return '';
-      if (i.skipCompile) return i.code;
+    html: html
+      .map((i) => {
+        if (!i.code) return '';
+        if (i.skipCompile) return i.code;
 
-      const ret = marked(i.code as string);
-      return i.transform ? i.transform(ret) : ret;
-    }).join(''),
+        const ret = marked(i.code as string);
+        return i.transform ? i.transform(ret) : ret;
+      })
+      .join(''),
 
-    style: style.length ? `<style${getAttrs(style)}>\n${style.map(s => s.code).join('\n')}\n</style>` : undefined,
+    style: style.length
+      ? `<style${getAttrs(style)}>\n${style.map((s) => s.code).join('\n')}\n</style>`
+      : undefined,
     matter,
   };
 }

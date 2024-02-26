@@ -84,29 +84,24 @@ asdasdasdasd
 
 describe('parse', () => {
   it('basic', () => {
-    expect(parse(md)).toMatchSnapshot();
+    expect(parse(md, [], '')).toMatchSnapshot();
   });
 
   it('with matter', () => {
-    expect(parse(mdWithMatter)).toMatchSnapshot();
+    expect(parse(mdWithMatter, [], '')).toMatchSnapshot();
   });
 
   it('transform imports', () => {
-    expect(parse(mdWithImports, [
-      transformImports()
-    ])).toMatchSnapshot();
+    expect(parse(mdWithImports, [transformImports()], '')).toMatchSnapshot();
   });
 
   it('transform vue', () => {
-    expect(parse(mdWithVue, [
-      transformVue()
-    ])).toMatchSnapshot();
+    expect(parse(mdWithVue, [transformVue()], '')).toMatchSnapshot();
   });
 
   it('transform imports & vue & importsAsComponents:true', () => {
-    expect(parse(mdWithImportsVue, [
-      transformImports(),
-      transformVue({ importsAsComponents: true })
-    ])).toMatchSnapshot();
+    expect(
+      parse(mdWithImportsVue, [transformImports(), transformVue({ importsAsComponents: true })], '')
+    ).toMatchSnapshot();
   });
 });

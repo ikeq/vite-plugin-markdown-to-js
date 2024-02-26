@@ -3,7 +3,7 @@ const tagOpeningRe = /\<((?:[a-z]+)(?:-[a-z]+)?)\s?/;
 function parseTag(content: string, tag: string) {
   const matcher = {
     openingRe: new RegExp(`\\<${tag}([\\s\\S]*?)\\>`),
-    closingRe: new RegExp(`\\<\\/${tag}\\>`)
+    closingRe: new RegExp(`\\<\\/${tag}\\>`),
   };
   let remaining = content;
   let pointer = -1;
@@ -51,7 +51,7 @@ function parseTag(content: string, tag: string) {
     code: content.slice(...indics),
     tag,
     attrs,
-    remaining
+    remaining,
   };
 }
 
@@ -65,7 +65,7 @@ export function parseSFC<T>(raw: string): { code: string; tag: string & T; attrs
       ret.push({
         tag: block.tag,
         code: block.code,
-        attrs: block.attrs
+        attrs: block.attrs,
       });
       if (block.remaining) {
         fn(block.remaining, ret);
@@ -73,7 +73,7 @@ export function parseSFC<T>(raw: string): { code: string; tag: string & T; attrs
     }
 
     return ret;
-  }
+  };
   const blocks = fn(raw) as ReturnType<typeof parseSFC>;
 
   // merging
@@ -85,7 +85,7 @@ export function parseSFC<T>(raw: string): { code: string; tag: string & T; attrs
       ret[i.tag] = {
         tag: i.tag,
         attrs: attrs ? ` ${attrs}` : '',
-        code: ''
+        code: '',
       };
     }
     ret[i.tag].code = ret[i.tag].code + '\n' + i.code.trim();

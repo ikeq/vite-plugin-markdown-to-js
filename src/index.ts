@@ -4,7 +4,7 @@ import { LangTransform, parse } from './parse';
 
 interface Options {
   transforms: LangTransform[];
-  render?: (output: ReturnType<typeof parse>, env: { path: string; raw: string; }) => string;
+  render?: (output: ReturnType<typeof parse>, env: { path: string; raw: string }) => string;
   markedOptions?: MarkedOptions;
 }
 
@@ -14,8 +14,9 @@ export { parse };
 
 export default function vitePluginMarkdownToJs(options: Options): PluginOption {
   const transforms = options.transforms || [];
-  const render = options.render
-    || ((output) => `export default ${JSON.stringify(output.html + output.style + output.script)};`);
+  const render =
+    options.render ||
+    ((output) => `export default ${JSON.stringify(output.html + output.style + output.script)};`);
 
   function markdownToJs(raw: string, id: string) {
     return render(parse(raw, transforms, id, options.markedOptions), { path: id, raw });
@@ -38,8 +39,8 @@ export default function vitePluginMarkdownToJs(options: Options): PluginOption {
         const defaultRead = ctx.read;
         ctx.read = async function () {
           return markdownToJs(await defaultRead(), ctx.file);
-        }
+        };
       }
     },
-  }
-};
+  };
+}

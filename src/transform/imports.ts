@@ -1,5 +1,5 @@
 import camelCase from 'lodash/camelCase';
-import { LangTransform } from "../parse";
+import { LangTransform } from '../parse';
 
 const rSplit = /[\n\s,]/;
 const rExt = /\.\w+$/;
@@ -13,7 +13,10 @@ const rExt = /\.\w+$/;
  * ```
  * ```
  */
-export function transformImports({ base, defaultPrefix }: { base?: string | ((path: string) => string); defaultPrefix?: string } = {}): LangTransform {
+export function transformImports({
+  base,
+  defaultPrefix,
+}: { base?: string | ((path: string) => string); defaultPrefix?: string } = {}): LangTransform {
   const baseFn = (() => {
     if (typeof base === 'function') return base;
     if (typeof base === 'string') {
@@ -29,25 +32,27 @@ export function transformImports({ base, defaultPrefix }: { base?: string | ((pa
     lang: 'imports',
     transform(src) {
       const imports = [...new Set(src.split(rSplit).filter((i) => i))];
-      const importNames = imports.map((i) => defaultPrefix ? camelCase(`${defaultPrefix} ${i}`) : i);
+      const importNames = imports.map((i) =>
+        defaultPrefix ? camelCase(`${defaultPrefix} ${i}`) : i
+      );
 
       return [
         {
           type: 'imports',
           imports: importNames,
-          code: ''
+          code: '',
         },
         {
           type: 'script',
           imports: importNames,
-          code: imports.map(
-            (i, index) => {
+          code: imports
+            .map((i, index) => {
               const path = baseFn(`${i}${rExt.test(i) ? '' : '.md'}`);
-              return `import ${importNames[index]} from "${path}";`
-            }
-          ).join('\n')
-        }
+              return `import ${importNames[index]} from "${path}";`;
+            })
+            .join('\n'),
+        },
       ];
     },
   };
-};
+}

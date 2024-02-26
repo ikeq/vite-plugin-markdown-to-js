@@ -17,8 +17,7 @@ export const matter = {};
 exports[`parse transform imports & vue & importsAsComponents:true 1`] = `
 Object {
   "html": "<h1 id=\\"title\\">title</h1>
-<a/><b/><c/>
-<div>
+<a/><b/><c/><div>
 <template>asd</template>
 </div><!-- langvue --><pre v-pre><code class=\\"language-html\\">&lt;template&gt;
 &lt;div&gt;
@@ -39,13 +38,11 @@ export default { name: &#39;test&#39; }
 import a from \\"a.md\\";
 import b from \\"b.md\\";
 import c from \\"c.md\\";
-
 export default {
  components: { a,b,c }, name: 'test' }
 export const matter = {};
 </script>",
   "style": "<style lang=\\"less\\" scoped>
-
 .test { color: red; }
 </style>",
 }
@@ -70,7 +67,6 @@ export const matter = {};
 exports[`parse transform vue 1`] = `
 Object {
   "html": "<h1 id=\\"title\\">title</h1>
-
 <div>
 <template>{{ name }}</template>
 </div><!-- langvue --><pre v-pre><code class=\\"language-html\\">&lt;template&gt;
@@ -96,7 +92,6 @@ export default {
 ",
   "matter": Object {},
   "script": "<script>
-
 export default {
  components: {  },
   name: 'test',
@@ -109,7 +104,6 @@ export default {
 export const matter = {};
 </script>",
   "style": "<style>
-
 .test { color: red; }
 </style>",
 }

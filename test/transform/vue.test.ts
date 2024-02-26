@@ -102,31 +102,33 @@ describe('parseSFC', () => {
 });
 
 describe('transformVue', () => {
+  const env = { matter: {}, path: '' };
+
   it('basic', () => {
     const { transform } = transformVue();
 
-    expect(transform(sfcMerging, '```vue\n```', { matter: {} })).toMatchSnapshot();
+    expect(transform(sfcMerging, '```vue\n```', env)).toMatchSnapshot();
   });
 
   it('sans script', () => {
     const { transform } = transformVue();
 
-    expect(transform(sfcSansScript, '```vue\n```', { matter: {} })).toMatchSnapshot();
+    expect(transform(sfcSansScript, '```vue\n```', env)).toMatchSnapshot();
   });
 
   it('importsAsComponents: true', () => {
     const { transform } = transformVue({ importsAsComponents: true });
 
-    expect(transform(sfcMerging, '```vue\n```', { matter: {} })).toMatchSnapshot();
+    expect(transform(sfcMerging, '```vue\n```', env)).toMatchSnapshot();
   });
 
   it('importsAsComponents: Function', () => {
     const { transform } = transformVue({
       importsAsComponents(a) {
-        return 'a'
-      }
+        return 'a';
+      },
     });
 
-    expect(transform(sfcMerging, '```vue\n```', { matter: {} })).toMatchSnapshot();
+    expect(transform(sfcMerging, '```vue\n```', env)).toMatchSnapshot();
   });
 });

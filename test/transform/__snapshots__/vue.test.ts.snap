@@ -115,16 +115,14 @@ exports[`transformVue basic 1`] = `
 Array [
   Object {
     "attrs": " lang=\\"scss\\"",
-    "code": "
-.test { color: red; }
+    "code": ".test { color: red; }
 .test { color: blue; }",
     "skipCompile": true,
     "type": "style",
   },
   Object {
     "attrs": " lang=\\"ts\\"",
-    "code": "
-export const a = 1;
+    "code": "export const a = 1;
 export default {
  components: {  }, name: 'test' };",
     "skipCompile": true,
@@ -132,8 +130,7 @@ export default {
   },
   Object {
     "attrs": " foo",
-    "code": "
-<template>1</template>
+    "code": "<template>1</template>
 <template>2</template>",
     "skipCompile": true,
     "type": "template",
@@ -151,8 +148,7 @@ exports[`transformVue importsAsComponents: Function 1`] = `
 Array [
   Object {
     "attrs": " lang=\\"scss\\"",
-    "code": "
-.test { color: red; }
+    "code": ".test { color: red; }
 .test { color: blue; }",
     "skipCompile": true,
     "type": "style",
@@ -165,8 +161,7 @@ Array [
   },
   Object {
     "attrs": " foo",
-    "code": "
-<template>1</template>
+    "code": "<template>1</template>
 <template>2</template>",
     "skipCompile": true,
     "type": "template",
@@ -184,8 +179,7 @@ exports[`transformVue importsAsComponents: true 1`] = `
 Array [
   Object {
     "attrs": " lang=\\"scss\\"",
-    "code": "
-.test { color: red; }
+    "code": ".test { color: red; }
 .test { color: blue; }",
     "skipCompile": true,
     "type": "style",
@@ -198,8 +192,7 @@ Array [
   },
   Object {
     "attrs": " foo",
-    "code": "
-<template>1</template>
+    "code": "<template>1</template>
 <template>2</template>",
     "skipCompile": true,
     "type": "template",
@@ -223,15 +216,13 @@ Array [
   },
   Object {
     "attrs": "",
-    "code": "
-.test { color: red; }",
+    "code": ".test { color: red; }",
     "skipCompile": true,
     "type": "style",
   },
   Object {
     "attrs": "",
-    "code": "
-<div>
+    "code": "<div>
   <template>asd</template>
 </div>",
     "skipCompile": true,
