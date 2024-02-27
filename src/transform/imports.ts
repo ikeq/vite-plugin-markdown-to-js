@@ -31,7 +31,7 @@ export function transformImports({
   return {
     lang: 'imports',
     transform(src) {
-      const imports = [...new Set(src.split(rSplit).filter((i) => i))];
+      const imports = Array.from(new Set(src.split(rSplit).filter((i) => i)));
       const importNames = imports.map((i) =>
         defaultPrefix ? camelCase(`${defaultPrefix} ${i}`) : i
       );

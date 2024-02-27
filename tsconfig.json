@@ -1,16 +1,18 @@
 {
   "include": ["src"],
-  "exclude": ["**/dist", "**/node_modules", "**/test"],
   "compilerOptions": {
-    "outDir": "dist",
-    "target": "ES2019",
-    "module": "commonjs",
+    "outDir": "dist/types",
+    "target": "ESNext",
+    "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "declaration": true,
+    "emitDeclarationOnly": true,
     "sourceMap": false,
     "noUnusedLocals": true,
     "esModuleInterop": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "rootDir": "src",
+    "skipLibCheck": true
   }
 }
