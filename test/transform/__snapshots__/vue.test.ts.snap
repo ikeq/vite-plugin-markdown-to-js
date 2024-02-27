@@ -236,3 +236,35 @@ Array [
   },
 ]
 `;
+
+exports[`transformVue setup 1`] = `
+Array [
+  Object {
+    "attrs": " lang=\\"less\\" scoped",
+    "code": ".test { color: red; }",
+    "skipCompile": true,
+    "type": "style",
+  },
+  Object {
+    "attrs": " lang=\\"ts\\" setup",
+    "code": "const data = { name: 'test' }",
+    "skipCompile": true,
+    "type": "script",
+  },
+  Object {
+    "attrs": " lang=\\"html\\"",
+    "code": "<div>
+  <template
+  a=\\"1\\">{{ data }}</template>
+</div>",
+    "skipCompile": true,
+    "type": "template",
+  },
+  Object {
+    "code": "\`\`\`html
+\`\`\`",
+    "transform": [Function],
+    "type": "html",
+  },
+]
+`;

@@ -8,7 +8,7 @@ Object {
 ",
   "matter": Object {},
   "script": "<script>
-export const matter = {};
+
 </script>",
   "style": undefined,
 }
@@ -40,7 +40,6 @@ import b from \\"b.md\\";
 import c from \\"c.md\\";
 export default {
  components: { a,b,c }, name: 'test' }
-export const matter = {};
 </script>",
   "style": "<style lang=\\"less\\" scoped>
 .test { color: red; }
@@ -58,7 +57,6 @@ Object {
 import a from \\"a.md\\";
 import b from \\"b.md\\";
 import c from \\"c.md\\";
-export const matter = {};
 </script>",
   "style": undefined,
 }
@@ -101,26 +99,9 @@ export default {
     }
   }
 }
-export const matter = {};
 </script>",
   "style": "<style>
 .test { color: red; }
 </style>",
-}
-`;
-
-exports[`parse with matter 1`] = `
-Object {
-  "html": "<h1 id=\\"title\\">title</h1>
-<p>asdasdasd</p>
-<p>asdasdasdasd</p>
-",
-  "matter": Object {
-    "foo": "bar",
-  },
-  "script": "<script>
-export const matter = {\\"foo\\":\\"bar\\"};
-</script>",
-  "style": undefined,
 }
 `;

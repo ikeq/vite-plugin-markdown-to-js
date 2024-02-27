@@ -77,11 +77,7 @@ export function parse(
   return {
     script:
       `<script${getAttrs(script, scriptFn)}>\n` +
-      [
-        ...script.map((i) => i.code),
-        ...scriptFn.map((i) => i.code(script, html)),
-        `export const matter = ${JSON.stringify(matter)};`,
-      ].join('\n') +
+      [...script.map((i) => i.code), ...scriptFn.map((i) => i.code(script, html))].join('\n') +
       `\n</script>`,
 
     // comes last so that it can be modified by script

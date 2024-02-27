@@ -83,6 +83,20 @@ const sfcSansScript = `
 .test { color: red; }
 </style>`;
 
+const sfcWithSetup = `
+<template lang="html">
+<div>
+  <template
+  a="1">{{ data }}</template>
+</div>
+</template>
+<script lang="ts" setup>
+const data = { name: 'test' }
+</script>
+<style lang="less" scoped>
+.test { color: red; }
+</style>`;
+
 describe('parseSFC', () => {
   it('basic', () => {
     expect(parseSFC(sfc)).toMatchSnapshot();
@@ -114,6 +128,12 @@ describe('transformVue', () => {
     const { transform } = transformVue();
 
     expect(transform(sfcSansScript, '```vue\n```', env)).toMatchSnapshot();
+  });
+
+  it('setup', () => {
+    const { transform } = transformVue();
+
+    expect(transform(sfcWithSetup, '```vue\n```', env)).toMatchSnapshot();
   });
 
   it('importsAsComponents: true', () => {

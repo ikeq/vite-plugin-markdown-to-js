@@ -1,4 +1,4 @@
-import kebabCase from 'lodash/kebabCase';
+import { kebabCase } from 'lodash';
 import { CodeBlock, LangTransform } from '../../parse';
 import { parseSFC } from './sfc';
 
@@ -8,8 +8,9 @@ const defaultRenders: Record<
 > = {
   template: (code) => code.trim(),
   style: (code) => code.trim(),
-  script: (code, { imports }) => {
+  script: (code, { imports, setup }) => {
     code = code.trim();
+    if (setup) return code;
     if (!code) {
       return `export default { components: { ${imports || ''} } };`;
     }
@@ -95,6 +96,7 @@ export function transformVue(
         const tagName = key as keyof typeof tags;
         const block = tags[tagName];
         const renderer = renders[tagName];
+        const setup = / setup/.test(block.attrs);
         const code: CodeBlock['code'] =
           tagName === 'script' && options.importsAsComponents
             ? (scripts, html) => {
@@ -112,7 +114,7 @@ export function transformVue(
                   }
                 });
 
-                return renderer(block.code, { imports }, env);
+                return renderer(block.code, { imports, setup }, env);
               }
             : renderer(block.code, {}, env);
 

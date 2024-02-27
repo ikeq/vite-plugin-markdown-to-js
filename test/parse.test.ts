@@ -88,7 +88,7 @@ describe('parse', () => {
   });
 
   it('with matter', () => {
-    expect(parse(mdWithMatter, [], '')).toMatchSnapshot();
+    expect(parse(mdWithMatter, [], '').matter).toStrictEqual({ foo: 'bar' });
   });
 
   it('transform imports', () => {
